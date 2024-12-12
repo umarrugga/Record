@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/NUESA.png" type="image/x-icon">
+    <link rel="stylesheet" href="loader2.css">
+    <title>Record</title>
+</head>
+<body>
+  
+    <div class="content2">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+        <div class="img">
+            <div><img src="images/NUESA.png" width="100px"></div>
+            <div><img src="images/ksusta.png" width="150px"></div>
+        </div>
+        <div class="main2">
+            <div class="text">
+                <h1>Nigerian University Engineering Student Association [AFUSTA Chapter]</h1>
+                <h2>E-Record for NUESA</h2>
+                <h5>Office Of Sales Director Fill The Following Form</h5>
+            </div> 
+            <form name="submit-to-google-sheet" id="form">
+                <div class="form2">
+                    <input id="input" name="Serial_no" type="number" placeholder="serial no." required>
+                    <input id="input" name="Received_from" type="text" placeholder="Received From [Name]." required>
+                    <input id="input" name="Adm_no" type="number" placeholder="Adm No." required>
+                    <select name="Department" required>
+                        <option value="none" selected disabled hidden>Select Department</option>
+                        <option value="EEE">Electrical & Electronic Engineering</option>
+                        <option value="MEE">Mechanical Engineering</option>
+                        <option value="CVE">Civil Engineering</option>
+                        <option value="ICT">Information Communication Technology</option>
+                    </select>
+                    <input id="input" name="Sum_of" type="number" placeholder="sum of" required>
+                    <input id="input" name="Date" type="date" placeholder="date" required>
+                    <input id="input" name="Phone_no" type="number" placeholder="Phone No." required>
+                    <select name="Gender" required>
+                        <option value="" selected disabled hidden>Gender</option>
+                        <option value="Male">M</option>
+                        <option value="Female">F</option>
+                    </select>
+                    <input id="input" name="Cashier_name" type="text" placeholder="Cashier Name." required>
+                    <input id="input" name="Cashier_name_phone_no" type="number" placeholder="Cashier Name Phone No." required>
+                    <input id="input" name="Remark" type="text" placeholder="Remark (Optional)" required>
+                    <button class="save-btn" name="submit" id="button"><b>Submit</b></button>
+                   <p>
+                    <a href="index.html">Log Out</a>
+                </p>
+                </div>
+            </form>
+        </div>   
+        <h6><a id="right" href="">© Copyright 2024 Powered by Umar Rugga</a></h6>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzys86Gry0LvJz_jUD4QM74GPt9kwor6lJP1BXEjBngEMTyw3EqEDjPxO-0OgBeo49v_g/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            const submitBtn = document.querySelector(".save-btn");
+            submitBtn.innerHTML = "<div class='percentage'>0%</div>"; // Start with 0% progress
+            submitBtn.classList.add('loading');
+            let progress = 0;
+
+            // Simulate the percentage loader (from 0 to 100)
+            const interval = setInterval(() => {
+                progress += 10;
+                submitBtn.querySelector('.percentage').textContent = `${progress}%`;
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    submitForm();
+                }
+            }, 200); // Adjust speed of percentage progress
+
+            function submitForm() {
+                fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    .then(response => {
+                        if (response.ok) {
+                            // Handle successful submission
+                            alert("Form submitted successfully! ✅✅✅✅✅✅");
+                            resetForm();  // Reset form and button
+                        } else {
+                            // Handle error
+                            if (response.status === 400) {
+                                alert("Bad Request: Please check your input values.");
+                            } else {
+                                alert("An error occurred. Please try again later.");
+                            }
+                            resetForm();  // Reset form and button
+                        }
+                    })
+                    .catch(error => {
+                        alert("An error occurred: " + error.message);
+                        resetForm();  // Reset form and button
+                    });
+            }
+
+            function resetForm() {
+                submitBtn.innerHTML = "<b>Submit</b>"; // Reset the button text
+                submitBtn.classList.remove('loading');
+                form.reset();  // Reset the form fields
+            }
+        });
+    </script>
+</body>
+</html>

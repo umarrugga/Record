@@ -1,0 +1,78 @@
+   /* Style for the button */
+   button {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Ensure the button text is replaced with percentage */
+.percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Hide the button text while loading */
+button.loading {
+    pointer-events: none; /* Disable button click */
+}
+
+
+
+
+
+
+
+.save-btn {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Centering the loader inside the button */
+.loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+}
+
+
+/* Hide the button text while the loader is active */
+.save-btn.loading {
+    pointer-events: none; /* Disable button click */
+}
+
+/* Ensure the percentage text is centered in the button */
+.percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}

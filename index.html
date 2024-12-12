@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/NUESA.png" type="image/x-icon">
+    <link rel="stylesheet" href="loader.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="content">
+        <div class="box"></div>
+        <div class="main"> 
+            <div class="img2">
+                <div><img src="images/NUESA.png" width="100px"></div>
+                <div><img src="images/ksusta.png" width="150px"></div>
+            </div>
+            <h2>Welcome Back Umar Rugga</h2>
+            <form id="loginForm">
+                <input type="text" id="username" name="username" placeholder="Enter Your Name">
+                <input type="password" id="password" name="password" placeholder="Enter Your Password">
+                <button type="submit" id="loginBtn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // If the login is incorrect, reset button text to "Login"
+            loginBtn.textContent = "Login"; // Reset text to "Login" initially
+            loginBtn.classList.add('loading');
+            let progress = 0;
+            loginBtn.textContent = "0%"; // Initially set to "0%"
+
+            const interval = setInterval(() => {
+                progress += 10; // Increase progress by 10% each time
+                loginBtn.textContent = `${progress}%`; // Update button text with progress
+
+                if (progress === 100) {
+                    clearInterval(interval);
+
+                    if (username === 'umarrugga' && password === '0128jss0128') {
+                        // Redirect to record.html after successful login
+                        window.location.href = 'record.html';
+                    } else {
+                        // If login fails, reset the button
+                        alert('Invalid username or password');
+                        loginBtn.textContent = "Login"; // Reset button text to "Login"
+                    }
+
+                    // Disable further clicks and reset button style
+                    loginBtn.classList.remove('loading');
+                }
+            }, 200); // Simulate loading progress over time (adjust the speed as needed)
+        });
+    </script>
+</body>
+</html>
